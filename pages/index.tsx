@@ -67,6 +67,7 @@ export default function Home() {
     title: "Anton Sydor - Web Developer",
     description: `I've been working on Web development for 10 years straight. Get in touch with me to know more.`,
     image: "/myPortfolio.png",
+    icon: "/favicon.ico",
     type: "website",
   };
   const isProd = process.env.NODE_ENV === "production";
@@ -75,6 +76,7 @@ export default function Home() {
     <>
       <Head>
         <title>{meta.title}</title>
+        <link rel="icon" href={meta.icon} sizes="any" />
         <meta name="robots" content="follow, index" />
         <meta content={meta.description} name="description" />
         <meta property="og:url" content={`anton-sydor.netlify.app`} />
