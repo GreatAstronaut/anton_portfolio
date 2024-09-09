@@ -2,14 +2,14 @@
   <img alt="Logo" src="/public/favicon.ico" width="100" />
 </div>
 <h1 align="center">
-  anton.sydor.netlify.app - v1
+  anton-sydor.netlify.app - v1
 </h1>
 <p align="center">
-  The first iteration of <a href="https://anton.sydor.netlify.app/" target="_blank">anton.sydor.netlify.app</a> built with <a href="https://nextjs.org/" target="_blank">Nextjs</a> and hosted with <a href="https://netlify.com/" target="_blank">Netlify</a>
+  The first iteration of <a href="https://anton-sydor.netlify.app/" target="_blank">anton-sydor.netlify.app</a> built with <a href="https://nextjs.org/" target="_blank">Nextjs</a> and hosted with <a href="https://netlify.com/" target="_blank">Netlify</a>
 </p>
 
 <p align="center">
-  <a href="https://anton.sydor.netlify.app/" target="_blank">
+  <a href="https://anton-sydor.netlify.app/" target="_blank">
         <img src="https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F0yl0614h0lrw7xuq38zt.png" width="100" alt="Netlify Status" />  </a>
 </p>
 
@@ -95,7 +95,7 @@ SOFTWARE.
 
 ## Author Info
 
-- Website - [Anton Sydor](https://anton.sydor.netlify.app/)
+- Website - [Anton Sydor](https://anton-sydor.netlify.app/)
 
 Built in 2023
 
