@@ -138,7 +138,7 @@ export default function SomethingIveBuilt() {
               </ul>
               <div className="z-10 flex fle-row space-x-5 ">
                 <a
-                  href="https://11mirrors-hotel.com/"
+                  href="https://www.davidsonhomes.com/"
                   target={"_blank"}
                   rel="noreferrer"
                 >
@@ -161,7 +161,7 @@ export default function SomethingIveBuilt() {
           >
             <div className="relative rounded w-full h-full col-start-6 col-span-7 ">
               <a
-                href="https://make-awesome-avatar-dev.netlify.app/"
+                href="https://my.kernelwealth.co.nz/"
                 target={"_blank"}
                 rel="noreferrer"
               >
@@ -198,7 +198,7 @@ export default function SomethingIveBuilt() {
               <div className="flex flex-col space-y-1  z-10">
                 <span className="text-AAsecondary text-base">Kernelwealth</span>
                 <a
-                  href="https://make-awesome-avatar-dev.netlify.app/"
+                  href="https://my.kernelwealth.co.nz/"
                   target={"_blank"}
                   rel="noreferrer"
                 >
@@ -240,7 +240,7 @@ export default function SomethingIveBuilt() {
               </ul>
               <div className="z-10 flex fle-row space-x-5 sm:pt-0 pt-2">
                 <a
-                  href="https://make-awesome-avatar-dev.netlify.app/"
+                  href="https://my.kernelwealth.co.nz/"
                   target={"_blank"}
                   rel="noreferrer"
                 >
@@ -263,7 +263,7 @@ export default function SomethingIveBuilt() {
           >
             <div className="relative rounded w-full h-full col-span-7 ">
               <a
-                href="https://www.doctorbuddyapp.com/"
+                href="https://11mirrors-hotel.com/"
                 target={"_blank"}
                 rel="noreferrer"
               >
@@ -287,7 +287,7 @@ export default function SomethingIveBuilt() {
                 <div className="absolute w-full h-full bg-AAprimary opacity-80 z-10"></div>
                 <Img
                   src={"/mirror.png"}
-                  alt={"DoctorBuddy"}
+                  alt={"11 Mirror"}
                   className={`w-full h-full `}
                 />
               </div>
