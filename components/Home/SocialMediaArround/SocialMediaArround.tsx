@@ -48,7 +48,7 @@ export default function SocialMediaEmail(props: { finishedLoading: boolean }) {
             {/* Linkedin icon */}
             <IconClickableWithAnimation
               Icon={LinkedinIcon}
-              href={"https://ua.linkedin.com/in/anton-sydor-34878b316"}
+              href={"https://www.linkedin.com/in/anton-sydor-363a17334/"}
             />
             {/* Discord Icon */}
             <IconClickableWithAnimation
