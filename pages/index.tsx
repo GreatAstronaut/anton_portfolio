@@ -77,7 +77,7 @@ export default function Home() {
       <Head>
         <title>{meta.title}</title>
         <link rel="icon" href={meta.icon} sizes="any" />
-        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex" />
         <meta content={meta.description} name="description" />
         <meta property="og:url" content={`anton-sydor.netlify.app`} />
         <link rel="canonical" href={`anton-sydor.netlify.app`} />
