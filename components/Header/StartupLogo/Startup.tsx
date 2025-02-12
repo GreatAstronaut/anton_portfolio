@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
-const Startup = (props) => {
+const Startup = () => {
   let WidthBy2 = 0;
   let HeightBy2 = 0;
   let greaterThanSmall = false;
@@ -112,7 +112,7 @@ const Startup = (props) => {
           transition={{ scale: { delay: 1.5, duration: 1.5 } }}
           className="text-AAsecondary font-Text2 text-4xl"
         >
-          S
+          A
         </motion.span>
       </motion.div>
     </motion.div>
