@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TelegramIcon(props) {
+export default function TelegramIcon(props: { className: string }) {
   return (
     <svg
     className={props.className}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DiscordIcon(props) {
+export default function DiscordIcon(props: { className: string }) {
   return (
     <svg
             className={props.className}

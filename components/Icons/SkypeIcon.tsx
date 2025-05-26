@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SkypeIcon(props) {
+export default function SkypeIcon(props: { className: string }) {
   return (
     <svg
       className={props.className}

@@ -6,9 +6,6 @@ import MobileMenu from "./Headercomp/MobileMenu";
 import { motion } from "../../node_modules/framer-motion/dist/framer-motion";
 import AppContext from "../AppContextFolder/AppContext";
 
-const addClass = (ref: any, myclass: string) => {
-  ref.current?.classLIst.add(myclass);
-};
 const Header = (props: { finishedLoading: boolean; sectionsRef }) => {
   const RefNavBar = useRef<HTMLDivElement>(null);
   const [ShowElement, setShowElement] = useState(false);

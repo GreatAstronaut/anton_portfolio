@@ -1,4 +1,4 @@
-const GithubIcon = (props) => {
+const GithubIcon = (props: { link: string }) => {
   return (
     <a href={props.link} target="_blank" rel="noreferrer">
       <svg
