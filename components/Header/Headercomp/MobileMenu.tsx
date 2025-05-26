@@ -1,7 +1,6 @@
 
-import React from "react";
+import React, { useCallback } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-scroll";
 
 interface MobileMenuProps {
   rotate: boolean;
@@ -10,7 +9,14 @@ interface MobileMenuProps {
   setShowElement: (value: boolean) => void;
 }
 
-const menuItems = [
+interface MenuItem {
+  label: string;
+  section: string;
+  number: string;
+  offset: number;
+}
+
+const menuItems: MenuItem[] = [
   {
     label: "About",
     section: "aboutSection",
@@ -43,56 +49,67 @@ const menuItems = [
   },
 ];
 
-const MobileMenu: React.FC<MobileMenuProps> = ({
-  rotate,
-  setRotate,
-  ShowElement,
-  setShowElement,
-}) => {
-  const closeMenu = () => {
-    setRotate(!rotate);
-    setShowElement(!ShowElement);
-  };
+const MobileMenu: React.FC<MobileMenuProps> = React.memo(
+  ({ rotate, setRotate, ShowElement, setShowElement }) => {
+    const closeMenu = useCallback(() => {
+      setRotate(!rotate);
+      setShowElement(!ShowElement);
+    }, [setRotate, setShowElement, rotate, ShowElement]);
 
-  return (
-    <motion.div
-      initial={{ x: "100%" }}
-      animate={rotate ? { x: "0" } : { x: "100%" }}
-      transition={{ x: { duration: 0.4 } }}
-      className="w-full fixed h-screen flex md:hidden duration-300 z-20"
-    >
-      <div
-        onClick={closeMenu}
-        className="w-1/4 h-full backdrop-blur-sm bg-MobileNavColor/30 hover:cursor-pointer"
-      />
-      <div className="w-3/4 h-full bg-MobileNavBarColor flex flex-col justify-center items-center space-y-8 font-sans">
-        {menuItems.map((item, idx) => (
-          <Link
-            key={item.label}
-            to={item.section}
-            spy={true}
-            smooth={true}
-            offset={item.offset}
-            duration={200}
-            onClick={closeMenu}
-            className="flex flex-col text-center space-y-2"
-          >
-            <span className="text-AAsecondary text-xs font-mono hover:cursor-pointer">
-              {item.number}
-            </span>
-            <span className="text-white font-Text2 text-sm sm:text-base hover:text-AAsecondary hover:cursor-pointer duration-300">
-              {item.label}
-            </span>
-          </Link>
-        ))}
-        <a href="/resume.pdf" target="_blank" rel="noreferrer">
-          <button className="rounded border font-Text2 border-AAsecondary hover:bg-ResumeButtonHover py-2 sm:py-4 px-5 sm:px-10 text-xs text-AAsecondary">
-            Resume
-          </button>
-        </a>
-      </div>
-    </motion.div>
-  );
-};
+    const handleAnchorClick = (
+      e: React.MouseEvent<HTMLAnchorElement>,
+      offset: number,
+      section: string
+    ) => {
+      e.preventDefault();
+      const el = document.getElementById(section);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset + offset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+      closeMenu();
+    };
+
+    return (
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={rotate ? { x: "0" } : { x: "100%" }}
+        transition={{ x: { duration: 0.4 } }}
+        className="w-full fixed h-screen flex md:hidden duration-300 z-20"
+      >
+        <div
+          onClick={closeMenu}
+          className="w-1/4 h-full backdrop-blur-sm bg-gray-900/30 hover:cursor-pointer" // Use a darker overlay for better contrast
+        />
+        <div className="w-3/4 h-full bg-gray-900 flex flex-col justify-center items-center space-y-8 font-sans">
+          {menuItems.map((item) => (
+            <a
+              key={item.label}
+              href={`#${item.section}`}
+              onClick={e => handleAnchorClick(e, item.offset, item.section)}
+              className="flex flex-col text-center space-y-2"
+            >
+              <span className="text-blue-400 text-xs font-mono hover:cursor-pointer">
+                {/* Use a blue with good contrast on dark background */}
+                {item.number}
+              </span>
+              <span className="text-white font-Text2 text-sm sm:text-base hover:text-blue-400 hover:cursor-pointer duration-300">
+                {/* White text on dark background, blue on hover */}
+                {item.label}
+              </span>
+            </a>
+          ))}
+          <a href="/resume.pdf" target="_blank" rel="noreferrer">
+            <button className="rounded border font-Text2 border-blue-400 hover:bg-blue-700 py-2 sm:py-4 px-5 sm:px-10 text-xs text-blue-400">
+              Resume
+            </button>
+          </a>
+        </div>
+      </motion.div>
+    );
+  }
+);
+
+MobileMenu.displayName = "MobileMenu";
 
 export default MobileMenu;

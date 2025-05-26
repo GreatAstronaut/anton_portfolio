@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 import ArrowIcon from "../../Icons/ArrowIcon";
 import YourITSoft from "./Descriptions/YourITSoft";
 import Yaware from "./Descriptions/Yaware";
@@ -19,10 +19,10 @@ export default function WhereIHaveWorked() {
   return (
     <div
       data-aos="fade-up"
-      className="flex flex-col items-center justify-center py-24 space-y-12 bg-AAprimary max-w-8xl"
+      className="flex flex-col xl:space-y-28 space-y-12 bg-AAprimary w-full 2xl:px-72 lg:px-24 md:px-16 sm:px-16 py-32 px-4 max-w-8xl aos-init aos-animate"
     >
       {/* // ? Title "Where I've Worked" */}
-      <section className="flex flex-row items-center">
+      <section className="flex items-center md:justify-center px-4 sm:px-0 w-full">
         <div className="flex flex-row items-center">
           <ArrowIcon
             className={"flex-none h-4 md:h-6 w-4 md:w-5 text-AAsecondary"}
@@ -32,7 +32,6 @@ export default function WhereIHaveWorked() {
             02.
           </span>
         </div>
-
         <span className="text-gray-200 opacity-85 font-bold tracking-wider text-lg md:text-2xl px-3">
           Where I&apos;ve Worked
         </span>

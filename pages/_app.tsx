@@ -1,7 +1,6 @@
-
 import "../styles/globals.css";
 import AppContext from "../components/AppContextFolder/AppContext";
-import { useRef, useState, useMemo, ReactNode } from "react";
+import { useRef, useState, useMemo } from "react";
 import type { AppProps } from "next/app";
 
 // Types for shared state
@@ -18,8 +17,14 @@ export type SharedState = {
   };
   userdata: {
     timerCookieRef: React.MutableRefObject<number | null>;
-    windowSizeTracker: React.MutableRefObject<{ width: number; height: number } | null>;
-    mousePositionTracker: React.MutableRefObject<{ x: number; y: number } | null>;
+    windowSizeTracker: React.MutableRefObject<{
+      width: number;
+      height: number;
+    } | null>;
+    mousePositionTracker: React.MutableRefObject<{
+      x: number;
+      y: number;
+    } | null>;
   };
   typing: {
     keyboardEvent: KeyboardEvent | null;
@@ -36,32 +41,37 @@ export type AppContextValue = {
 function MyApp({ Component, pageProps }: AppProps) {
   // Refs for userdata
   const timerCookieRef = useRef<number | null>(null);
-  const windowSizeTrackerRef = useRef<{ width: number; height: number } | null>(null);
+  const windowSizeTrackerRef = useRef<{ width: number; height: number } | null>(
+    null
+  );
   const mousePositionRef = useRef<{ x: number; y: number } | null>(null);
 
   // Memoize initial state to avoid recreation on each render
-  const initialState = useMemo<SharedState>(() => ({
-    portfolio: {
-      NavBar: {
-        IntervalEvent: null,
-        scrolling: null,
-        scrollSizeY: null,
+  const initialState = useMemo<SharedState>(
+    () => ({
+      portfolio: {
+        NavBar: {
+          IntervalEvent: null,
+          scrolling: null,
+          scrollSizeY: null,
+        },
+        Scrolling: {
+          IntervalEvent: null,
+        },
       },
-      Scrolling: {
-        IntervalEvent: null,
+      userdata: {
+        timerCookieRef,
+        windowSizeTracker: windowSizeTrackerRef,
+        mousePositionTracker: mousePositionRef,
       },
-    },
-    userdata: {
-      timerCookieRef,
-      windowSizeTracker: windowSizeTrackerRef,
-      mousePositionTracker: mousePositionRef,
-    },
-    typing: {
-      keyboardEvent: null,
-      eventInputLostFocus: null,
-    },
-    finishedLoading: false,
-  }), [timerCookieRef, windowSizeTrackerRef, mousePositionRef]);
+      typing: {
+        keyboardEvent: null,
+        eventInputLostFocus: null,
+      },
+      finishedLoading: false,
+    }),
+    [timerCookieRef, windowSizeTrackerRef, mousePositionRef]
+  );
 
   const [sharedState, setSharedState] = useState<SharedState>(initialState);
 

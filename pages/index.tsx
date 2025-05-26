@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import Aos from "aos";
@@ -58,7 +57,8 @@ const META: MetaTags = {
 
 const Home: React.FC = () => {
   const [showElement, setShowElement] = useState<boolean>(false);
-  const [showThisCantBeReached, setShowThisCantBeReached] = useState<boolean>(true);
+  const [showThisCantBeReached, setShowThisCantBeReached] =
+    useState<boolean>(true);
   const [showMe, setShowMe] = useState<boolean>(false);
 
   // Use context with type assertion or fallback

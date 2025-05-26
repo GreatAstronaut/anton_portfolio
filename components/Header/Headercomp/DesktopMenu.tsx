@@ -1,7 +1,5 @@
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Link as ReactScrollLink } from "react-scroll";
 
 type DesktopMenuProps = {
   finishedLoading: boolean;
@@ -16,15 +14,14 @@ type MenuItemProps = {
   finishedLoading: boolean;
 };
 
-const animationProps = (delay: number, finishedLoading: boolean) => ({
-  initial: { y: -40, opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-  transition: {
-    type: "spring",
-    duration: finishedLoading ? 0 : 1.2,
-    delay: finishedLoading ? 0 : delay,
-  },
-});
+const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, to: string, offset = -100) => {
+  e.preventDefault();
+  const element = document.getElementById(to);
+  if (element) {
+    const y = element.getBoundingClientRect().top + window.pageYOffset + offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+};
 
 const MenuItem: React.FC<MenuItemProps> = ({
   to,
@@ -34,23 +31,27 @@ const MenuItem: React.FC<MenuItemProps> = ({
   delay,
   finishedLoading,
 }) => (
-  <motion.div
-    {...animationProps(delay, finishedLoading)}
+  <div
     className="text-AAsecondary hover:cursor-pointer"
+    style={{
+      opacity: finishedLoading ? 1 : 0,
+      transform: finishedLoading ? "none" : "translateY(-40px)",
+      transition: finishedLoading
+        ? "none"
+        : `opacity 1.2s ${delay}s, transform 1.2s ${delay}s`,
+    }}
   >
-    <ReactScrollLink
-      to={to}
-      spy={true}
-      smooth={true}
-      offset={offset}
-      duration={200}
+    <a
+      href={`#${to}`}
+      onClick={(e) => handleSmoothScroll(e, to, offset)}
+      className="text-AAsecondary hover:cursor-pointer"
     >
       &gt; {number}.{" "}
       <span className="text-white hover:cursor-pointer hover:text-AAsecondary duration-300">
         {label}
       </span>
-    </ReactScrollLink>
-  </motion.div>
+    </a>
+  </div>
 );
 
 const menuItems = [
@@ -59,28 +60,28 @@ const menuItems = [
     label: "About",
     number: "01",
     offset: -100,
-    delay: 9.4,
+    delay: 0.4,
   },
   {
     to: "WhereIhaveWorkedSection",
     label: "Experience",
     number: "02",
     offset: -300,
-    delay: 9.7,
+    delay: 0.7,
   },
   {
     to: "WhereIhaveWorkedSection",
     label: "Education",
     number: "03",
     offset: -300,
-    delay: 9.7,
+    delay: 0.7,
   },
   {
     to: "SomethingIveBuiltSection",
     label: "Work",
     number: "04",
     offset: -100,
-    delay: 9.8,
+    delay: 0.8,
   },
 ];
 
@@ -94,30 +95,33 @@ const DesktopMenu: React.FC<DesktopMenuProps> = ({ finishedLoading }) => {
           finishedLoading={finishedLoading}
         />
       ))}
-      <motion.span
-        {...animationProps(10, finishedLoading)}
+      <span
         className="text-AAsecondary hover:cursor-pointer"
+        style={{
+          opacity: finishedLoading ? 1 : 0,
+          transform: finishedLoading ? "none" : "translateY(-40px)",
+          transition: finishedLoading
+            ? "none"
+            : `opacity 1.2s 1s, transform 1.2s 1s`,
+        }}
       >
-        <ReactScrollLink
-          to="GetInTouchSection"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={200}
+        <a
+          href="#GetInTouchSection"
+          onClick={(e) => handleSmoothScroll(e, "GetInTouchSection", -100)}
+          className="text-AAsecondary hover:cursor-pointer"
         >
           &gt; 05.{" "}
           <span className="text-white hover:cursor-pointer hover:text-AAsecondary duration-300">
             Contact
           </span>
-        </ReactScrollLink>
-      </motion.span>
+        </a>
+      </span>
       <a href={"/resume.pdf"} target={"_blank"} rel="noreferrer">
-        <motion.button
-          {...animationProps(10.2, finishedLoading)}
+        <button
           className="text-AAsecondary border border-spacing-2 py-2 px-3 rounded-sm border-AAsecondary hover:bg-ResumeButtonHover"
         >
           Resume
-        </motion.button>
+        </button>
       </a>
     </div>
   );
