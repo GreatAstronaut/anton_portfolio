@@ -1,57 +1,57 @@
-const HasZipCode = (obj) => {
-  for (const x of obj) {
-    const elem = x.address_components;
-    if (!isNaN(elem[elem.length - 1].long_name)) {
-      return elem[elem.length - 1].long_name;
+
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+// Type for Google Geocode API response
+interface AddressComponent {
+  long_name: string;
+  short_name: string;
+  types: string[];
+}
+
+interface GeocodeResult {
+  address_components: AddressComponent[];
+  // ...other fields can be added as needed
+}
+
+// Utility to extract zip code from geocode results
+function extractZipCode(results: GeocodeResult[]): string {
+  for (const result of results) {
+    const components = result.address_components;
+    const lastComponent = components[components.length - 1];
+    if (lastComponent && !isNaN(Number(lastComponent.long_name))) {
+      return lastComponent.long_name;
     }
   }
   return "00000";
-};
+}
 
-export default async function handler(req, res) {
-  const getcoding = async (lat: string, lon: string) => {
-    return fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=` +
-        lat +
-        `,` +
-        lon +
-        `&key=` +
-        process.env.NEXT_PUBLIC_KEY_GOOGLE_API
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const result = data.results;
-        return HasZipCode(result);
-      })
-      .catch((err) => {
-        console.error("When fetching data from google api : \n", err);
-        return "00000";
-      });
-  };
-  const geolocation = async (ip) => {
-    return fetch(`http://ip-api.com/json/` + ip)
-      .then((res) => res.json())
-      .then(async (data) => {
-        return {
-          zip: await getcoding(data.lat, data.lon),
-          country: data.country,
-          countryCode: data.countryCode,
-          region: data.region,
-          regionName: data.regionName,
-          city: data.city,
-          datetime: new Date().toLocaleString("en-US", {
-            timeZone: data.timezone,
-          }),
-          lat: data.lat,
-          lon: data.lon,
-          timezone: data.timezone,
-          isp: data.isp,
-          org: data.org,
-          as: data.as,
-          query: data.query,
-        };
-      })
-      .catch((err) => console.log(err));
-  };
-  res.status(200).json(await getcoding(req.query.lat, req.query.lon));
+// Fetch zip code using Google Geocode API
+async function fetchZipCode(lat: string, lon: string): Promise<string> {
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.NEXT_PUBLIC_KEY_GOOGLE_API}`
+    );
+    const data = await response.json();
+    return extractZipCode(data.results);
+  } catch (err) {
+    console.error("Error fetching data from Google API:", err);
+    return "00000";
+  }
+}
+
+// API handler
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { lat, lon } = req.query;
+
+  // Validate input
+  if (typeof lat !== 'string' || typeof lon !== 'string') {
+    res.status(400).json({ error: "Latitude and longitude must be provided as strings." });
+    return;
+  }
+
+  const zip = await fetchZipCode(lat, lon);
+  res.status(200).json({ zip });
 }
