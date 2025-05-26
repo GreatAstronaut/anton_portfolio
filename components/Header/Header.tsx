@@ -1,120 +1,112 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+
+import React, { useRef, useState, useEffect, useContext, useCallback } from "react";
 import Logo from "./Headercomp/Logo";
 import DesktopMenu from "./Headercomp/DesktopMenu";
 import IconMenu from "./Headercomp/IconMenu";
 import MobileMenu from "./Headercomp/MobileMenu";
-import { motion } from "../../node_modules/framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 import AppContext from "../AppContextFolder/AppContext";
 
-const Header = (props: { finishedLoading: boolean; sectionsRef }) => {
-  const RefNavBar = useRef<HTMLDivElement>(null);
-  const [ShowElement, setShowElement] = useState(false);
-  const [rotate, setRotate] = useState<boolean>(false);
+interface HeaderProps {
+  finishedLoading: boolean;
+  sectionsRef: any;
+}
+
+const Header: React.FC<HeaderProps> = ({ finishedLoading, sectionsRef }) => {
+  const navBarRef = useRef<HTMLDivElement>(null);
+  const [showElement, setShowElement] = useState(false);
+  const [rotate, setRotate] = useState(false);
   const context = useContext(AppContext);
-  const scrollSizeY = useRef<number>(0);
+  const scrollYRef = useRef<number>(0);
 
-  // Define the EventListener for the NavBar
-  useEffect(() => {
-    if (context.sharedState.portfolio.NavBar.IntervalEvent == null) {
-      context.sharedState.portfolio.NavBar.IntervalEvent = () => {
-        if (scrollSizeY.current == 0) {
-          scrollSizeY.current = window.scrollY;
-        } else {
-          if (window.scrollY > 50) {
-            if (window.scrollY > scrollSizeY.current) {
-              if (RefNavBar) {
-                RefNavBar.current?.classList.remove("translate-y-0");
-                RefNavBar.current?.classList.add("-translate-y-full");
-              }
-            } else {
-              RefNavBar.current?.classList.add("translate-y-0");
-              RefNavBar.current?.classList.remove("-translate-y-full");
-            }
-            scrollSizeY.current = window.scrollY;
-          }
-        }
-      };
+  // Scroll handler to show/hide navbar on scroll direction
+  const handleScroll = useCallback(() => {
+    if (!navBarRef.current) return;
+
+    if (scrollYRef.current === 0) {
+      scrollYRef.current = window.scrollY;
+      return;
     }
-  }, [
-    context.sharedState.portfolio.NavBar,
-    context.sharedState.portfolio.NavBar.IntervalEvent,
-  ]);
 
-  //Adding the EventListener for the NavBar
-  useEffect(() => {
-    if (context.sharedState.portfolio.NavBar.scrolling == null) {
-      context.sharedState.portfolio.NavBar.scrolling = true;
-      scrollSizeY.current = 0;
-      //Hide when scroll down & show when scroll up
-      if (typeof window !== "undefined") {
-        window.addEventListener(
-          "scroll",
-          context.sharedState.portfolio.NavBar.IntervalEvent
-        );
+    if (window.scrollY > 50) {
+      if (window.scrollY > scrollYRef.current) {
+        navBarRef.current.classList.remove("translate-y-0");
+        navBarRef.current.classList.add("-translate-y-full");
+      } else {
+        navBarRef.current.classList.add("translate-y-0");
+        navBarRef.current.classList.remove("-translate-y-full");
       }
+      scrollYRef.current = window.scrollY;
     }
-  }, [
-    context.sharedState.portfolio.NavBar,
-    context.sharedState.portfolio.NavBar.scrolling,
-  ]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowElement(true);
-    }, 10400);
   }, []);
 
-  //veify document for serverSide rendering
+  // Attach/detach scroll event listener
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  if (typeof document !== "undefined") {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
+  // Show navbar after loading animation
+  useEffect(() => {
+    const timer = setTimeout(() => setShowElement(true), 10400);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Control body scroll based on menu state and loading
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
     if (context.sharedState.finishedLoading) {
-      rotate
-        ? (document.body.style.overflowY = "hidden")
-        : (document.body.style.overflowY = "auto");
+      document.body.style.overflowY = rotate ? "hidden" : "auto";
     } else {
       document.body.style.overflowY = "hidden";
     }
-  }
+    // Clean up on unmount
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [rotate, context.sharedState.finishedLoading]);
+
   return (
     <>
-      {/* Mobile visible Navbar component, controlling ShowElement state to hide itself and rotate itself */}
+      {/* Mobile Menu */}
       <MobileMenu
         rotate={rotate}
         setRotate={setRotate}
         setShowElement={setShowElement}
-        ShowElement={ShowElement}
+        ShowElement={showElement}
       />
-      {/* This parent element for Menu */}
+
+      {/* Navbar */}
       <motion.div
-        ref={RefNavBar}
+        ref={navBarRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        // changed from 10.4 to 1
         transition={{
-          opacity: { delay: props.finishedLoading ? 0 : 9.4, duration: 0 },
+          opacity: { delay: finishedLoading ? 0 : 9.4, duration: 0 },
         }}
         className={`w-full fixed ${
-          ShowElement ? `bg-opacity-70 shadow-xl` : `bg-opacity-0 `
-        } bg-AAprimary flex 
-      justify-between px-6 sm:px-12 py-2 sm:py-4  transition duration-4000 translate-y-0 z-20`}
+          showElement ? "bg-opacity-70 shadow-xl" : "bg-opacity-0"
+        } bg-AAprimary flex justify-between px-6 sm:px-12 py-2 sm:py-4 transition duration-4000 translate-y-0 z-20`}
       >
-        {/* Logo A */}
-        <Logo finishedLoading={props.finishedLoading} />
-
-        {/* Hide icon Designed by me */}
+        <Logo finishedLoading={finishedLoading} />
 
         <IconMenu
           rotate={rotate}
           setRotate={setRotate}
           setShowElement={setShowElement}
-          ShowElement={ShowElement}
-          finishedLoading={props.finishedLoading}
+          ShowElement={showElement}
+          finishedLoading={finishedLoading}
         />
 
-        {/* ? Desktop Menu by Titof */}
-        <DesktopMenu finishedLoading={props.finishedLoading} />
+        <DesktopMenu finishedLoading={finishedLoading} />
       </motion.div>
     </>
   );
 };
+
 export default Header;
