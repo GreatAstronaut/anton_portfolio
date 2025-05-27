@@ -54,7 +54,7 @@ export default function Education() {
 
               <Img
                 src={
-                  "https://uesukraine.com/wp-content/uploads/2016/09/Ternopil-National-Economic-University.jpg"
+                  "https://media.licdn.com/dms/image/v2/C4E1BAQE2fDD4xIECNQ/company-background_10000/company-background_10000/0/1590151367565/ternopil_academy_of_national_economy_cover?e=2147483647&v=beta&t=Eoqe2OiW7PDebJWRRJA8unBbFuTwGVUFsejkdgbWjLA"
                 }
                 alt={"Ternopil National Economic University"}
                 className={`w-full rounded h-full `}
@@ -71,7 +71,7 @@ export default function Education() {
                 <div className="absolute w-full h-full bg-AAprimary opacity-80 z-10"></div>
                 <Img
                   src={
-                    "https://uesukraine.com/wp-content/uploads/2016/09/Ternopil-National-Economic-University.jpg"
+                    "https://media.licdn.com/dms/image/v2/C4E1BAQE2fDD4xIECNQ/company-background_10000/company-background_10000/0/1590151367565/ternopil_academy_of_national_economy_cover?e=2147483647&v=beta&t=Eoqe2OiW7PDebJWRRJA8unBbFuTwGVUFsejkdgbWjLA"
                   }
                   alt={"Ternopil National Economic University"}
                   className={`w-full h-full `}

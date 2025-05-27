@@ -55,11 +55,11 @@ export default function YourITSoft() {
           {/* Title */}
           <span className="text-gray-100 sm:text-lg text-sm font-Arimo tracking-wide">
             Full Stack Developer{" "}
-            <span className="text-AAsecondary">(2 years 8 months)</span>
+            <span className="text-AAsecondary">(3 years 2 months)</span>
           </span>
           {/* Date */}
           <span className="font-mono text-xs text-gray-500">
-            August 2021 - April 2024
+            August 2021 - October 2024
           </span>
           <span
             className="font-mono text-xs text-AAsecondary hover:cursor-pointer"

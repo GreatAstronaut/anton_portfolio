@@ -21,7 +21,7 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     Icon: LinkedinIcon,
-    href: "https://www.linkedin.com/in/anton-sydor-363a17334/",
+    href: "https://www.linkedin.com/in/anton-sydor-579715342/",
     label: "LinkedIn Profile",
   },
   {

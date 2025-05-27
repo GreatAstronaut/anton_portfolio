@@ -125,6 +125,7 @@ const Home: React.FC = () => {
       <Head>
         <title>{META.title}</title>
         <link rel="icon" href={META.icon} sizes="any" />
+        <meta name="google-site-verification" content="DoJIuEfmkpBvNL2SkKfiztMUAvu14qG4DbVZ4f6On1Y" />
         <meta name="robots" content="follow, index" />
         <meta name="description" content={META.description} />
         <meta property="og:url" content={META.url} />
