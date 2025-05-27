@@ -52,8 +52,8 @@ export default function WhereIHaveWorked() {
 }
 
 const CompaniesBar = (props) => {
-  const [barPosition, setBarPosition] = React.useState<Number>(-8); // Green bar position by the default it's -20px
-  const [barAbovePosition, setBarAbovePosition] = React.useState<Number>(0);
+  const [barPosition, setBarPosition] = React.useState<number>(-8); // Green bar position by the default it's -20px
+  const [barAbovePosition, setBarAbovePosition] = React.useState<number>(0);
   const [companyNameBackgroundColorGreen, setCompanyNameBackgroundColorGreen] =
     React.useState<boolean[]>([true, false]);
   const CompanyButton = (props) => {

@@ -70,7 +70,7 @@ const menuItems = [
     delay: 0.7,
   },
   {
-    to: "WhereIhaveWorkedSection",
+    to: "EducationSection",
     label: "Education",
     number: "03",
     offset: -300,

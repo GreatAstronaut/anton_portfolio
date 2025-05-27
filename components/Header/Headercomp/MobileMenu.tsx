@@ -31,7 +31,7 @@ const menuItems: MenuItem[] = [
   },
   {
     label: "Education",
-    section: "WhereIhaveWorkedSection",
+    section: "EducationSection",
     number: "03.",
     offset: -250,
   },
