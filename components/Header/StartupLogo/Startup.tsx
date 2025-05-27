@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -41,22 +42,8 @@ const barConfigs = [
   { rotate: 35, x: 18, y: -34, delay: 1.5, opacityDelay: 2, key: "top-right" },
   { rotate: -35, x: -18, y: -34, delay: 1.5, opacityDelay: 2, key: "top-left" },
   // Diagonal bars (bottom)
-  {
-    rotate: -35,
-    x: 18,
-    y: 34,
-    delay: 1.5,
-    opacityDelay: 2,
-    key: "bottom-right",
-  },
-  {
-    rotate: 35,
-    x: -18,
-    y: 34,
-    delay: 1.5,
-    opacityDelay: 2,
-    key: "bottom-left",
-  },
+  { rotate: -35, x: 18, y: 34, delay: 1.5, opacityDelay: 2, key: "bottom-right" },
+  { rotate: 35, x: -18, y: 34, delay: 1.5, opacityDelay: 2, key: "bottom-left" },
 ];
 
 const Startup: React.FC = () => {
