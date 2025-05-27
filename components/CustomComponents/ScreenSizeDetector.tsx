@@ -1,6 +1,7 @@
+
 import React from "react";
 
-export default function ScreenSizeDetector() {
+export default function ScreenSizeDetector(): JSX.Element {
   return (
     <div
       className="z-10 fixed bottom-16 left-0  "

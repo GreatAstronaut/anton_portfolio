@@ -1,6 +1,5 @@
 import React from "react";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
-import Link from "next/link";
+import { motion } from 'framer-motion';
 import { useRouter } from "next/router";
 export default function MyName(props: { finishedLoading: boolean }) {
   const router = useRouter();
