@@ -51,7 +51,7 @@ const META: MetaTags = {
   image: "/myPortfolio.png",
   icon: "/favicon.ico",
   type: "website",
-  url: "anton-sydor.netlify.app",
+  url: "https://anton-sydor.netlify.app",
   twitter: "@titofabdo",
 };
 
