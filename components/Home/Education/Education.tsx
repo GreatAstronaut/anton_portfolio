@@ -1,14 +1,12 @@
-import { useRouter } from "next/router";
 import React from "react";
 import ArrowIcon from "../../Icons/ArrowIcon";
 import Img from "../../smallComp/image/Img";
 import ExternalLink from "../../Icons/ExternalLink";
 
 export default function Education() {
-  const router = useRouter();
   return (
     <section
-      id="Education"
+      id="EducationSection"
       data-aos="fade-up"
       className=" flex flex-col xl:space-y-28 space-y-12 bg-AAprimary w-full  
      2xl:px-72 lg:px-24 md:px-16 sm:px-16 py-32 px-4 max-w-8xl"

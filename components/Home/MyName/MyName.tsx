@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from 'framer-motion';
-import { useRouter } from "next/router";
 export default function MyName(props: { finishedLoading: boolean }) {
-  const router = useRouter();
   return (
     <div
       className="h-full flex flex-col justify-center
